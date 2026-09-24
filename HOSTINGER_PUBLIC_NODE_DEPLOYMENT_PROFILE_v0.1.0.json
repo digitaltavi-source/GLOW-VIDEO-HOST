@@ -1,7 +1,12 @@
 {
-  "schema_version": "0.1.0",
+  "schema_version": "0.1.1",
   "profile_id": "GLOW_VIDEO_HOSTINGER_PUBLIC_MCP",
   "state": "CANDIDATE_NOT_LIVE",
+  "purpose": "Deploy the declassified GLOW Video public MCP/auth edge on Hostinger Managed Node.js.",
+  "source": {
+    "repository": "digitaltavi-source/GLOW-VIDEO-HOST",
+    "branch": "candidate/chatgpt-host-v0.1.1"
+  },
   "runtime": {
     "node_version": "22.x",
     "repository_root": ".",
@@ -9,7 +14,8 @@
     "start_command": "npm start",
     "health_path": "/healthz",
     "readiness_path": "/readyz",
-    "mcp_path": "/mcp"
+    "legacy_mcp_path": "/mcp",
+    "fresh_chatgpt_mcp_path": "/mcp-v2"
   },
   "required_environment": [
     {
@@ -36,12 +42,48 @@
       "name": "GLOW_AUTH_MODE",
       "secret": false,
       "required": true
+    },
+    {
+      "name": "GLOW_OAUTH_ISSUER",
+      "secret": false,
+      "required_for": "oauth_or_hybrid"
+    },
+    {
+      "name": "GLOW_OAUTH_AUDIENCE",
+      "secret": false,
+      "required_for": "oauth_or_hybrid"
+    },
+    {
+      "name": "GLOW_OAUTH_JWKS_URL",
+      "secret": false,
+      "required_for": "oauth_or_hybrid"
+    },
+    {
+      "name": "GLOW_OAUTH_REQUIRED_SCOPES",
+      "secret": false,
+      "required_for": "oauth_or_hybrid"
+    },
+    {
+      "name": "GLOW_PUBLIC_AUTHORIZATION_SERVER",
+      "secret": false,
+      "required_for": "oauth_or_hybrid"
+    },
+    {
+      "name": "GLOW_SUPABASE_URL",
+      "secret": false,
+      "required_for": "consent_ui"
+    },
+    {
+      "name": "GLOW_SUPABASE_PUBLISHABLE_KEY",
+      "secret": false,
+      "required_for": "consent_ui"
     }
   ],
   "security": {
     "private_assets_embedded": false,
     "private_release_hashes_public": false,
     "model_session_private_is_public_delivery": false,
+    "static_bearer_user_facing": false,
     "protected_backend_unavailable": "FAIL_CLOSED"
   },
   "claims": {
@@ -51,5 +93,5 @@
     "chatgpt_connected": false,
     "field_verified": false
   },
-  "next_gate": "HOSTINGER_DEPLOYMENT_AFTER_PUBLIC_REPO_BUILD_PASS"
+  "next_gate": "PUBLIC_CI_PASS_THEN_PROTECTED_BACKEND_BINDING"
 }
