@@ -4,7 +4,7 @@
   "private": false,
   "type": "module",
   "scripts": {
-    "build": "tsc -p tsconfig.json && esbuild src/oauth-client.ts --bundle --format=iife --global-name=GlowVideoOAuth --outfile=dist/public/oauth-client.js",
+    "build": "tsc -p tsconfig.json && esbuild src/oauth-client.ts --bundle --format=iife --global-name=GlowVideoOAuth --outfile=dist/public/oauth-client.js && esbuild src/workspace-client.ts --bundle --format=iife --global-name=GlowVideoWorkspace --outfile=dist/public/workspace-client.js",
     "test": "npm run build && node --test dist/tests/*.test.js",
     "dev": "tsx src/server.ts",
     "start": "node dist/src/server.js"

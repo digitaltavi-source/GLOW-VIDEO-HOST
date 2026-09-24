@@ -25,6 +25,7 @@ import { VideoRequest } from "./contracts.js";
 import { classifyWorkResponse } from "./work-response.js";
 import { buildProtectedResourceMetadata } from "./resource-metadata.js";
 import { workspaceHtml } from "./workspace.js";
+import { registerWorkspaceRoutes, workspaceSecurityHeaders } from "./workspace-api.js";
 
 const config=loadConfig();
 const canonicalMcpUrl=new URL(process.env.GLOW_PUBLIC_MCP_URL ?? `http://127.0.0.1:${config.port}/mcp-v2`);
@@ -253,6 +254,7 @@ const app=createMcpExpressApp({
   allowedHosts:(process.env.GLOW_ALLOWED_HOSTS ?? "localhost,127.0.0.1")
     .split(",").map(v=>v.trim()).filter(Boolean)
 });
+app.use(workspaceSecurityHeaders);
 
 const mcpV1ServerUrl=new URL("/mcp",publicOrigin);
 const mcpV2ServerUrl=new URL("/mcp-v2",publicOrigin);
@@ -305,6 +307,7 @@ app.get("/.well-known/oauth-authorization-server",(_req:Request,res:Response)=>{
 });
 
 const publicDir=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"../public");
+registerWorkspaceRoutes({app,config,oauthConfig,publicDir});
 
 app.get("/oauth-config.js",(_req:Request,res:Response)=>{
   const supabaseUrl=process.env.GLOW_SUPABASE_URL?.trim();
