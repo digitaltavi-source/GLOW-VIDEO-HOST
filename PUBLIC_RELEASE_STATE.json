@@ -1,0 +1,15 @@
+{
+  "product": "GLOW Video Host",
+  "version": "0.1.0-candidate",
+  "state": "CHATGPT_WORK_LOOP_HOST_CANDIDATE",
+  "primary_host": "ChatGPT",
+  "hostinger_deployed": false,
+  "live_backend_connected": false,
+  "private_core_embedded": false,
+  "backend_llm_api_required": false,
+  "model_session_private_contract": true,
+  "chatgpt_end_to_end_verified": false,
+  "real_video_mission_completed": false,
+  "independently_qualified": false,
+  "field_verified": false
+}

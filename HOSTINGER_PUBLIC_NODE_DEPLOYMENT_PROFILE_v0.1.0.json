@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1.0",
+  "profile_id": "GLOW_VIDEO_HOSTINGER_PUBLIC_MCP",
+  "state": "CANDIDATE_NOT_LIVE",
+  "runtime": {
+    "node_version": "22.x",
+    "repository_root": ".",
+    "build_command": "npm install --ignore-scripts && npm run build",
+    "start_command": "npm start",
+    "health_path": "/healthz",
+    "readiness_path": "/readyz",
+    "mcp_path": "/mcp"
+  },
+  "required_environment": [
+    {
+      "name": "GLOW_PROTECTED_SERVICE_URL",
+      "secret": false,
+      "required": true
+    },
+    {
+      "name": "GLOW_PROTECTED_SERVICE_TOKEN",
+      "secret": true,
+      "required": true
+    },
+    {
+      "name": "GLOW_PUBLIC_MCP_URL",
+      "secret": false,
+      "required": true
+    },
+    {
+      "name": "GLOW_ALLOWED_HOSTS",
+      "secret": false,
+      "required": true
+    },
+    {
+      "name": "GLOW_AUTH_MODE",
+      "secret": false,
+      "required": true
+    }
+  ],
+  "security": {
+    "private_assets_embedded": false,
+    "private_release_hashes_public": false,
+    "model_session_private_is_public_delivery": false,
+    "protected_backend_unavailable": "FAIL_CLOSED"
+  },
+  "claims": {
+    "hostinger_deployed": false,
+    "publicly_reachable": false,
+    "oauth_live": false,
+    "chatgpt_connected": false,
+    "field_verified": false
+  },
+  "next_gate": "HOSTINGER_DEPLOYMENT_AFTER_PUBLIC_REPO_BUILD_PASS"
+}
