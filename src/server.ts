@@ -1,3 +1,4 @@
+
 import { randomUUID } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -23,6 +24,7 @@ import { callProtectedService, checkProtectedReadiness } from "./backend.js";
 import { VideoRequest } from "./contracts.js";
 import { classifyWorkResponse } from "./work-response.js";
 import { buildProtectedResourceMetadata } from "./resource-metadata.js";
+import { workspaceHtml } from "./workspace.js";
 
 const config=loadConfig();
 const canonicalMcpUrl=new URL(process.env.GLOW_PUBLIC_MCP_URL ?? `http://127.0.0.1:${config.port}/mcp-v2`);
@@ -276,6 +278,10 @@ const mcpV1=makeResourceBinding(mcpV1ServerUrl);
 const mcpV2=makeResourceBinding(mcpV2ServerUrl);
 const node=toNodeHandler(handler);
 
+app.get("/",(_req:Request,res:Response)=>{
+  res.type("html").send(workspaceHtml());
+});
+
 app.get(new URL(mcpV1.metadataUrl).pathname,(_req:Request,res:Response)=>res.json(mcpV1.metadata));
 app.get(new URL(mcpV2.metadataUrl).pathname,(_req:Request,res:Response)=>res.json(mcpV2.metadata));
 
@@ -394,3 +400,4 @@ app.all("/mcp-v2",mcpV2.auth,(req:Request,res:Response)=>void node(req,res,req.b
 app.listen(config.port,()=>{
   console.error(`GLOW Video public host listening on :${config.port}`);
 });
+
