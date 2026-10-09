@@ -1,23 +1,9 @@
-# GLOW Video Public Security Boundary
+# Public information boundary
 
-Public-safe:
-- MCP request/response contracts
-- authentication/resource metadata code
-- Hostinger deployment metadata
-- user-facing docs/UI
-- bounded status/error vocabulary
+Allowed: public product description, stable MCP endpoint, generic workflow, public tool names, deployment responsibilities and accurately scoped readiness statements.
 
-Forbidden:
-- KIT A/B/C internals
-- Capability System internals
-- Factory Control/private runtime
-- internal evaluator rules, thresholds and prompts
-- restricted evidence and release hashes
-- credentials and provider secrets
+Never publish private Factory source/capability internals, internal prompts/evaluator thresholds, customer briefs/reference media, raw phase payloads/approval receipts, account or client identifiers, state filesystem locations, environment values, tokens, credentials or private audit logs. Public status/health must remain bounded and declassified.
 
-Laws:
-- `PUBLIC HOST != PROTECTED BACKEND`
-- `PUBLIC ADAPTER != SOURCE OF TRUTH`
-- `PUBLIC_DECLASSIFIED = USER-SAFE EGRESS`
-- `MODEL_SESSION_PRIVATE = AUTHENTICATED CHATGPT WORK CONTEXT`
-- `BACKEND UNAVAILABLE -> FAIL CLOSED / DEGRADED`
+OAuth identity and backend-issued operator permissions authorize actions. Role words in chat grant no authority. Acceptance is bound to the exact mission, phase, state version and content; the operator must review it explicitly.
+
+Historical public Host source is retained unchanged under _archive for recoverability. It is not deployed and must not be followed as current configuration. A scoped signature scan found no private-key/known-token patterns in 29 files at the latest historical candidate. This is not exhaustive certification of every historical commit. Suspected credential exposure requires investigation and rotation; never disclose the value in a report.

@@ -1,15 +1,16 @@
 {
-  "product": "GLOW Video Host",
-  "version": "0.1.0-candidate",
-  "state": "CHATGPT_WORK_LOOP_HOST_CANDIDATE",
-  "primary_host": "ChatGPT",
-  "hostinger_deployed": false,
-  "live_backend_connected": false,
-  "private_core_embedded": false,
-  "backend_llm_api_required": false,
-  "model_session_private_contract": true,
-  "chatgpt_end_to_end_verified": false,
-  "real_video_mission_completed": false,
+  "product": "GLOW Video",
+  "public_repository_role": "DOCUMENTATION_AND_INTEGRATION_SPECIFICATION",
+  "canonical_registration_path": "/mcp-v2",
+  "canonical_mcp_url": "https://peachpuff-frog-205135.hostingersite.com/mcp-v2",
+  "runtime_source": "PRIVATE_FACTORY_V2_MAIN",
+  "public_host_runtime_deployed": false,
+  "oauth_required": true,
+  "live_intake_h1_preparation_demonstrated": true,
+  "live_restart_persistence_demonstrated": true,
+  "complete_live_phase_acceptance_demonstrated": false,
+  "real_customer_video_delivery_demonstrated": false,
   "independently_qualified": false,
-  "field_verified": false
+  "field_five_star_qualified": false,
+  "as_of": "2026-10-09"
 }

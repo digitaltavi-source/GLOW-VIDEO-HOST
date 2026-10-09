@@ -1,0 +1,24 @@
+{
+  "source": "existing public repository only",
+  "snapshots": [
+    {
+      "ref": "main",
+      "commit": "4fcd6b49ec0a705bdc73bdd605601845e37475ef",
+      "tree": "50c73195f5aa5b78ae03c7fe51df01960a67f4ff",
+      "archive": "_archive/legacy-main"
+    },
+    {
+      "ref": "candidate/chatgpt-host-v0.1.1",
+      "commit": "0ec2e33e51b20a2ce0d1cdc580b8233a9c712235",
+      "tree": "db8ac0ccfdff754bafe42d75faf24f1f0bcd89ce",
+      "archive": "_archive/legacy-host-v0.1.1"
+    },
+    {
+      "ref": "candidate/chatgpt-host-v0.1.2-pre-demo",
+      "commit": "fbfee0ff080789a93bc2582235574c5cc3bb0701",
+      "tree": "c7c62ce6f7cf32435fd885c5a564f935b2f9089f",
+      "archive": "_archive/legacy-host-v0.1.2-pre-demo"
+    }
+  ],
+  "scope": "Preserves complete public snapshot trees and ancestry. Private Factory source and private logs not copied."
+}
