@@ -5,6 +5,7 @@ App: GLOW VIDEO. URL: https://peachpuff-frog-205135.hostingersite.com/mcp-v2. OA
 The current tool family includes:
 - glow_video_v2_public_profile
 - glow_start_video_v2_mission
+- glow_get_video_v2_context (private operator recovery)
 - glow_get_video_v2_status
 - glow_prepare_video_v2_phase_acceptance
 - glow_accept_video_v2_phase
@@ -20,3 +21,8 @@ Start/resume the intended mission. Prepare the exact phase content; inspect the 
 If tools are stale, refresh the existing app's tools once and inspect discovery. Do not recreate apps or repeatedly reconnect in response to a documentation commit. Report the exact bounded error and current state before another attempt.
 
 Legacy /mcp and /mcp-v3 are not supported operating routes. Archived source is not a fallback gateway.
+
+## Resume an existing professional mission
+Read bounded status to obtain current state/version, then call glow_get_video_v2_context with that exact mission/version. Verified operator permission is required. It returns accepted canonical phase content/hashes and any still-valid pending review privately. Use those exact hashes to prepare the next phase; do not reset the mission or reconstruct truth from remembered chat.
+
+Expired pending approval requires a new preparation, never an automatic approval. Reading context neither advances the mission nor grants customer/provider/release authority. Public status remains declassified; never publish recovered content or approval identifiers.
