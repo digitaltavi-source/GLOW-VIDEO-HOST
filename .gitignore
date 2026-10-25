@@ -1,0 +1,7 @@
+# Private Factory artifacts and secrets must never be published in the public Host repo.
+private-runtime/
+.env
+.env.*
+!.env.example
+node_modules/
+*.log
