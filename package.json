@@ -1,11 +1,11 @@
 {
   "name": "glow-video-host",
-  "version": "0.1.0-assembly-candidate",
+  "version": "0.2.0-universal-native-pipe",
   "private": true,
   "type": "module",
   "engines": { "node": ">=22 <25" },
   "scripts": {
-    "test": "node --test tests/*.test.mjs",
+    "test": "node --test \"tests/*.test.mjs\"",
     "build": "node scripts/assembly.mjs --verify",
     "start": "node scripts/assembly.mjs --start"
   }

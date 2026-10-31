@@ -1,7 +1,6 @@
-# Thông tin và quyền riêng tư
+# Chính Sách Quyền Riêng Tư, Bảo Mật Đa Người Dùng & Sở Hữu Trí Tuệ (`GLOW VIDEO`)
 
-Thông tin giới thiệu sản phẩm được công bố trong tài liệu giới thiệu. Nội dung công việc, tài liệu khách hàng và cách vận hành nội bộ không thuộc nội dung giới thiệu công khai.
-
-Chỉ cung cấp tài liệu mà bạn được phép sử dụng. Quyền thao tác phụ thuộc tài khoản đã được xác thực; lời tự xưng trong chat không tạo quyền.
-
-Tài liệu hiện hành đã được thu gọn. Nội dung từng được công bố có thể còn trong lịch sử hoặc bản lưu của bên khác; thay đổi tài liệu hiện hành không thu hồi được những bản đó.
+1. **Bảo vệ Bí mật Công nghệ Lõi:** Kho mã nguồn công khai `GLOW-VIDEO-HOST` chỉ chứa tài liệu giới thiệu và bộ kiểm định lắp ráp trung gian (`scripts/assembly.mjs`). Toàn bộ mã nguồn điều phối, thuật toán xử lý âm thanh – hình ảnh và cấu trúc vận hành nội bộ thuộc quyền sở hữu độc quyền của kho riêng tư `GLOW-VIDEO-FACTORY`.
+2. **Cách ly Tuyệt đối Dữ liệu Khách hàng (`Multi-Tenant Isolation`):** Mỗi dự án, kịch bản, bảng thiết kế nhân vật (`Reference Bible`), rãnh âm thanh và tệp video thành phẩm đều được gắn chặt với định danh tài khoản sở hữu (`owner_id` / `tenant_id`). Hệ thống từ chối mọi truy cập trái phép giữa các tài khoản khác nhau.
+3. **Bảo vệ Gói Tài sản Thành viên (`Encrypted Member Vault .ZIP`):** Gói nguyên liệu và kịch bản khả chuyển xuất tại cổng `FORK_TOKEN` được mã hóa bảo mật kèm chữ ký toàn vẹn (`PBKDF2-HMAC-SHA256` & `HMAC-SHA256`), chỉ mở khóa khi cung cấp đúng mật khẩu thành viên.
+4. **Quyền Sử dụng Tài liệu Tham chiếu:** Người dùng chịu trách nhiệm đảm bảo quyền hợp pháp đối với các hình ảnh, mẫu giọng nói và tư liệu tải lên. Quyền thực thi và phê duyệt sản phẩm dựa trên định danh tài khoản đã được xác thực, không dựa trên lời tự xưng trong hội thoại.
