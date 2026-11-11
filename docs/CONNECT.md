@@ -26,16 +26,17 @@ Khi triển khai `GLOW-VIDEO-HOST` cùng gói `private-runtime/` từ `GLOW-VIDE
 
 1. **Phễu Khám Phá & Giới Thiệu Công Khai (`Public Introduction`):**
    - Mọi người dùng khi hỏi thông tin giới thiệu qua công cụ `glow_video_v2_public_profile` hoặc truy cập `/about` đều nhận được thông tin tổng quan ngay lập tức mà không tiết lộ cấu trúc kỹ thuật nội bộ.
-2. **Xác Thực Tự Chủ `GLOW_NATIVE_GRANT` (OAuth 2.0 + PKCE `S256`):**
+2. **Xác Thực Tự Chủ `GLOW_NATIVE_GRANT` (OAuth 2.0 + PKCE `S256` & Bảo Mật 2 Bước RFC 6238):**
    - Máy chủ Hosting tự phát hành và kiểm định chữ ký thẻ truy cập (`HS256` với khóa bí mật `GLOW_NATIVE_OAUTH_SECRET` `>= 32` ký tự), gắn chặt quyền thực thi (`video.run`, `video.accept`) vào đúng `client_id` đã đăng ký và đúng tài nguyên `/mcp-v2`.
+   - Khóa API kết nối ngoài của người dùng (`BYOK`) được mã hóa xác thực tại chỗ bằng khóa độc lập `GLOW_CONNECTOR_AT_REST_SECRET` (`>= 32` ký tự, `enc:v1:...`), đồng thời quyền vận hành cấp cao `video.accept` (`18` công cụ MCP) bắt buộc qua xác thực 2 bước: Bước 1 đăng nhập (`GLOW_NATIVE_OPERATOR_PASSCODE` hoặc Google OIDC ghim bất biến `sub` qua `GLOW_ADMIN_EMAILS` / `GLOW_ADMIN_GOOGLE_SUBS`) và Bước 2 mã 6 chữ số TOTP điện thoại chuẩn RFC 6238 (`GLOW_NATIVE_OPERATOR_TOTP_SECRETS_JSON`).
 3. **Cách Ly Tài Khoản Đa Người Dùng (`Multi-Tenant Studio Boundary`):**
-   - Mọi dự án (`mission_id`) và tài sản xuất xưởng (`.wav`, `.mp3`, `.mp4`, `.zip`) đều được gắn định danh chủ sở hữu (`owner_id` / `tenant_id`). Người dùng của tài khoản khác truy cập chéo sẽ bị chặn tuyệt đối (`403 STUDIO_TENANT_ACCESS_DENIED`).
+   - Mọi dự án (`mission_id`) và tài sản xuất xưởng (`.wav`, `.mp3`, `.mp4`, `.zip`) đều được gắn định danh chủ sở hữu (`owner_id` / `tenant_id`) và giao cắt quyền thời gian thực từ SQLite. Người dùng của tài khoản khác truy cập chéo sẽ bị chặn tuyệt đối (`403 STUDIO_TENANT_ACCESS_DENIED`).
 
 ---
 
 ## 3. Quy Trình 5 Bước Nạp Gói Từ `GLOW-VIDEO-FACTORY` Sang `GLOW-VIDEO-HOST`
 
-Mỗi khi Nhà máy chính (`GLOW-VIDEO-FACTORY`) nâng cấp tính năng mới trên nhánh `main` (ví dụ commit `3210cd6d0e524c7aafcadfb402194188082bb539`):
+Mỗi khi Nhà máy chính (`GLOW-VIDEO-FACTORY`) nâng cấp tính năng mới trên nhánh `main` (ví dụ commit `5c88b4154d6af94a254715df34c98caec70f8506`):
 
 1. **Đóng gói tại Nhà máy Private:** Chạy công cụ đóng gói trong `GLOW-VIDEO-FACTORY` để xuất thư mục `private-runtime/` kèm file `assembly-manifest.json` (chứa danh sách toàn bộ file và mã băm SHA-256 tương ứng).
 2. **Nạp vào Máy chủ Hosting:** Đặt thư mục `private-runtime/` vào gốc thư mục triển khai của `GLOW-VIDEO-HOST` trên máy chủ Hosting.
