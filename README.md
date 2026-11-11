@@ -67,7 +67,7 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 {
   "contract": "GLOW_VIDEO_HOST_ASSEMBLY_V1",
   "factory_repository": "digitaltavi-source/GLOW-VIDEO-FACTORY",
-  "source_commit": "8f92bc4c269c4d2a9f6693d02aac1312834b2956",
+  "source_commit": "96f796474784efc580fb64937bf158a51a8203a7",
   "entry": "dist/src/server.js",
   "files": [
     { "path": "dist/src/server.js", "sha256": "<SHA256_CUA_FILE_THUC_TE>" }
@@ -83,12 +83,12 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 - `GLOW_NATIVE_OAUTH_SECRET=<chuoi-bi-mat-toi-thieu-32-ky-tu-do-founder-nam-giu>`
 - `GLOW_CONNECTOR_AT_REST_SECRET=<chuoi-bi-mat-doc-lap-toi-thieu-32-ky-tu-ma-hoa-api-key-byok-tai-cho>`
 - `GLOW_NATIVE_OPERATOR_PASSCODE=<passcode-buoc-1-dang-nhap-nhanh-quan-tri-web-studio-va-3-cong-cu-mcp-co-ban>`
-- `GLOW_NATIVE_OPERATOR_TOTP_SECRETS_JSON={"founder-operator":"<RFC6238_TOTP_SECRET_6_SO_DIEN_THOAI_BUOC_2_MO_KHOA_VIDEO_ACCEPT_18_CONG_CU_MCP>"}`
+- `GLOW_NATIVE_OPERATOR_TOTP_SECRETS_JSON={"founder-operator":"<RFC6238_TOTP_SECRET_6_SO_DIEN_THOAI_BUOC_2_MO_KHOA_VIDEO_ACCEPT_23_CONG_CU_MCP>"}`
 - `GLOW_ADMIN_EMAILS=<danh-sach-email-admin-xac-thuc-qua-google-oidc-phan-tach-boi-dau-phay>` (Tùy chọn: tự động ghim bất biến `sub` Google OIDC).
 - `GLOW_ADMIN_GOOGLE_SUBS=<danh-sach-google-sub-id-bat-bien-cua-admin-phan-tach-boi-dau-phay>` (Tùy chọn: khóa cứng định danh `sub` của Admin).
 - `GLOW_PUBLIC_MCP_URL=https://<ten-mien-hosting>/mcp-v2` (tự động suy diễn `issuer` và `audience` từ chính tên miền này).
 - `GLOW_OAUTH_ALLOWED_CLIENT_IDS=<danh-sach-client-id-duoc-phep-cach-nhau-boi-khoang-trang>`
 - `GLOW_V2_STATE_DIR=/duong/dan/tuyet/doi/ben/ngoai/thu-muc-deploy` (lưu trữ bền vững lịch sử dự án & SQLite WAL qua các lần nâng cấp).
-- `GLOW_VIDEO_APPROVED_SOURCE_SHA=8f92bc4c269c4d2a9f6693d02aac1312834b2956` (40 ký tự SHA của commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`).
+- `GLOW_VIDEO_APPROVED_SOURCE_SHA=96f796474784efc580fb64937bf158a51a8203a7` (40 ký tự SHA của commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`).
 - `GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=<ma-bam-sha256-64-ky-tu-cua-file-assembly-manifest.json>`.
 - `GLOW_FACTORY_REPOSITORY=digitaltavi-source/GLOW-VIDEO-FACTORY` (Tùy chọn: đổi tên repo khi áp dụng công thức này cho các nhà máy khác thuộc hệ sinh thái GLOW).
