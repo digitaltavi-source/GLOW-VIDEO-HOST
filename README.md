@@ -67,7 +67,7 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 {
   "contract": "GLOW_VIDEO_HOST_ASSEMBLY_V1",
   "factory_repository": "digitaltavi-source/GLOW-VIDEO-FACTORY",
-  "source_commit": "16ba63dab043930e50269bdb9d45845b255cbcaa",
+  "source_commit": "283716e380c74f169b7cc5f6281171250f3e434f",
   "entry": "dist/src/server.js",
   "files": [
     { "path": "dist/src/server.js", "sha256": "<SHA256_CUA_FILE_THUC_TE>" }
