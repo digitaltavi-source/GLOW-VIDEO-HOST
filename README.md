@@ -67,7 +67,7 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 {
   "contract": "GLOW_VIDEO_HOST_ASSEMBLY_V1",
   "factory_repository": "digitaltavi-source/GLOW-VIDEO-FACTORY",
-  "source_commit": "72424342ac440fc7811b4a90ffc7aea7ad111c88",
+  "source_commit": "16ba63dab043930e50269bdb9d45845b255cbcaa",
   "entry": "dist/src/server.js",
   "files": [
     { "path": "dist/src/server.js", "sha256": "<SHA256_CUA_FILE_THUC_TE>" }
@@ -89,6 +89,6 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 - `GLOW_PUBLIC_MCP_URL=https://<ten-mien-hosting>/mcp-v2` (tự động suy diễn `issuer` và `audience` từ chính tên miền này).
 - `GLOW_OAUTH_ALLOWED_CLIENT_IDS=<danh-sach-client-id-duoc-phep-cach-nhau-boi-khoang-trang>`
 - `GLOW_V2_STATE_DIR=/duong/dan/tuyet/doi/ben/ngoai/thu-muc-deploy` (lưu trữ bền vững lịch sử dự án & SQLite WAL qua các lần nâng cấp).
-- `GLOW_VIDEO_APPROVED_SOURCE_SHA=72424342ac440fc7811b4a90ffc7aea7ad111c88` (40 ký tự SHA của commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`).
+- `GLOW_VIDEO_APPROVED_SOURCE_SHA=16ba63dab043930e50269bdb9d45845b255cbcaa` (40 ký tự SHA của commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`).
 - `GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=<ma-bam-sha256-64-ky-tu-cua-file-assembly-manifest.json>`.
 - `GLOW_FACTORY_REPOSITORY=digitaltavi-source/GLOW-VIDEO-FACTORY` (Tùy chọn: đổi tên repo khi áp dụng công thức này cho các nhà máy khác thuộc hệ sinh thái GLOW).
