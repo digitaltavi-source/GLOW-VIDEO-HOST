@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# GLOW-VIDEO-HOST Public Pipe Pre-Push Gate
+npm test

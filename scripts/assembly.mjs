@@ -18,7 +18,12 @@ const owned=(root,target)=>{const r=relative(root,target);return r!==''&&!isAbso
 function canonicalFuturePath(candidate){
   let part=resolve(candidate);const suffix=[];
   while(true){
-    if(existsSync(part))return resolve(realpathSync(part),...suffix);
+    let st=null;
+    try{st=lstatSync(part)}catch(err){if(err?.code!=='ENOENT')fail('STATE_REALPATH_UNRESOLVED')}
+    if(st){
+      if(st.isSymbolicLink()&&!existsSync(part))fail('STATE_REALPATH_UNRESOLVED');
+      try{return resolve(realpathSync(part),...suffix)}catch{fail('STATE_REALPATH_UNRESOLVED')}
+    }
     const p=resolve(part,'..');if(p===part)fail('STATE_REALPATH_UNRESOLVED');
     suffix.unshift(part.split(/[\\/]/).at(-1));part=p;
   }
@@ -89,7 +94,7 @@ export function verifyAssembly({root=packageRoot,env=process.env}={}){
   let manifest;try{manifest=JSON.parse(raw.toString('utf8'))}catch{fail('ASSEMBLY_MANIFEST_INVALID_JSON')}
   if(manifest.contract!==CONTRACT||manifest.source_commit!==env.GLOW_VIDEO_APPROVED_SOURCE_SHA||!GIT_SHA.test(manifest.source_commit))fail('ASSEMBLY_SOURCE_IDENTITY_MISMATCH');
   if(manifest.factory_repository!==expectedRepo)fail('ASSEMBLY_FACTORY_IDENTITY_MISMATCH');
-  if(!validRelative(manifest.entry)||!manifest.entry.endsWith('.js'))fail('ASSEMBLY_ENTRY_INVALID');
+  if(!validRelative(manifest.entry)||!/\.(?:c|m)?js$/i.test(manifest.entry))fail('ASSEMBLY_ENTRY_INVALID');
   if(!Array.isArray(manifest.files)||!manifest.files.length)fail('ASSEMBLY_FILES_MISSING');
   const seen=new Set();
   for(const f of manifest.files){

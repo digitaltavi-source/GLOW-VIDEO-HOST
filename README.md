@@ -56,9 +56,9 @@ Hệ thống hỗ trợ mặc định cấu hình **`GLOW_OAUTH_AUTHORIZATION_PR
 ## 3. Lệnh Kiểm Thử, Kiểm Định & Khởi Chạy Trên Máy Chủ Hosting
 
 ```bash
-npm test       # Chạy 12 bài kiểm thử an toàn lắp ráp, GLOW Native Auth & Đa nhà máy (Cross-platform Windows/Linux)
+npm test       # Chạy 14 bài kiểm thử an toàn lắp ráp, GLOW Native Auth & Đa nhà máy (Cross-platform Windows/Linux)
 npm run build  # Kiểm định Fail-Closed gói private-runtime/ + assembly-manifest.json + biến môi trường
-npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy tiến trình private-runtime/dist/src/server.js
+npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy tiến trình private-runtime/hostinger-entrypoint.cjs
 ```
 
 ### Hợp đồng Gói Lắp Ráp (`private-runtime/assembly-manifest.json`)
@@ -67,10 +67,10 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 {
   "contract": "GLOW_VIDEO_HOST_ASSEMBLY_V1",
   "factory_repository": "digitaltavi-source/GLOW-VIDEO-FACTORY",
-  "source_commit": "283716e380c74f169b7cc5f6281171250f3e434f",
-  "entry": "dist/src/server.js",
+  "source_commit": "861ab47c5e3e49ec740232edd28f25ad8f91559e",
+  "entry": "hostinger-entrypoint.cjs",
   "files": [
-    { "path": "dist/src/server.js", "sha256": "<SHA256_CUA_FILE_THUC_TE>" }
+    { "path": "hostinger-entrypoint.cjs", "sha256": "<SHA256_CUA_FILE_THUC_TE>" }
   ]
 }
 ```
@@ -89,6 +89,6 @@ npm start      # Kiểm định toàn vẹn SHA-256 trước khi khởi chạy t
 - `GLOW_PUBLIC_MCP_URL=https://<ten-mien-hosting>/mcp-v2` (tự động suy diễn `issuer` và `audience` từ chính tên miền này).
 - `GLOW_OAUTH_ALLOWED_CLIENT_IDS=<danh-sach-client-id-duoc-phep-cach-nhau-boi-khoang-trang>`
 - `GLOW_V2_STATE_DIR=/duong/dan/tuyet/doi/ben/ngoai/thu-muc-deploy` (lưu trữ bền vững lịch sử dự án & SQLite WAL qua các lần nâng cấp).
-- `GLOW_VIDEO_APPROVED_SOURCE_SHA=16ba63dab043930e50269bdb9d45845b255cbcaa` (40 ký tự SHA của commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`).
+- `GLOW_VIDEO_APPROVED_SOURCE_SHA=ddf45688ca6345ac64451ecb0b59a7cc9b4e93f6` (40 ký tự SHA commit `main` đã duyệt trên `GLOW-VIDEO-FACTORY`, HEAD `main` hiện tại `dc0d55ca95c3a87cf3b15a5bec7ee0a055ee8d3d`; ứng viên `sandbox` mới nhất `861ab47c5e3e49ec740232edd28f25ad8f91559e`).
 - `GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=<ma-bam-sha256-64-ky-tu-cua-file-assembly-manifest.json>`.
 - `GLOW_FACTORY_REPOSITORY=digitaltavi-source/GLOW-VIDEO-FACTORY` (Tùy chọn: đổi tên repo khi áp dụng công thức này cho các nhà máy khác thuộc hệ sinh thái GLOW).

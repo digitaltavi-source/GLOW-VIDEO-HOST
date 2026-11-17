@@ -62,3 +62,41 @@ test('ECOSYSTEM_PIPE: GLOW_FACTORY_REPOSITORY allows universal multi-factory reu
   const r=verifyAssembly(f);
   assert.equal(r.factory_repository,'digitaltavi-source/GLOW-AUDIO-STORY-FACTORY');
 });
+test('ENTRY_EXTENSIONS (A1): attested .cjs and .mjs entrypoints pass while non-JS entrypoints fail closed',t=>{
+  const f=fixture(t);
+  const cjsCode=Buffer.from('module.exports = { ok: true };\n');
+  writeFileSync(resolve(f.bundle,'hostinger-entrypoint.cjs'),cjsCode);
+  f.manifest.entry='hostinger-entrypoint.cjs';
+  f.manifest.files.push({path:'hostinger-entrypoint.cjs',sha256:sha(cjsCode)});
+  f.env.GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=f.put();
+  const rCjs=verifyAssembly(f);
+  assert.equal(rCjs.status,'ASSEMBLY_BYTES_VERIFIED_NOT_RUNTIME_ATTESTED');
+  assert.equal(rCjs.files,2);
+
+  const mjsCode=Buffer.from('export const esm = true;\n');
+  writeFileSync(resolve(f.bundle,'dist','src','boot.mjs'),mjsCode);
+  f.manifest.entry='dist/src/boot.mjs';
+  f.manifest.files.push({path:'dist/src/boot.mjs',sha256:sha(mjsCode)});
+  f.env.GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=f.put();
+  const rMjs=verifyAssembly(f);
+  assert.equal(rMjs.files,3);
+
+  f.manifest.entry='dist/src/server.sh';
+  f.env.GLOW_VIDEO_ASSEMBLY_MANIFEST_SHA256=f.put();
+  assert.throws(()=>verifyAssembly(f),/ASSEMBLY_ENTRY_INVALID/);
+});
+test('PERSISTENCE_DANGLING_SYMLINK (F-09): dangling symlink at state dir leaf or ancestor fails closed with STATE_REALPATH_UNRESOLVED',t=>{
+  const f=fixture(t);
+  const extDir=mkdtempSync(resolve(tmpdir(),'gvf-host-state-'));
+  t.after(()=>rmSync(extDir,{recursive:true,force:true}));
+  const danglingLeaf=resolve(extDir,'dangling-state-link');
+  let symlinkCreated=false;
+  try{symlinkSync(resolve(f.root,'private-runtime','sneaky-missing-target'),danglingLeaf);symlinkCreated=true;}
+  catch(err){if(err?.code!=='EPERM')throw err;}
+  if(symlinkCreated){
+    f.env.GLOW_V2_STATE_DIR=danglingLeaf;
+    assert.throws(()=>verifyAssembly(f),/STATE_REALPATH_UNRESOLVED/);
+    f.env.GLOW_V2_STATE_DIR=resolve(danglingLeaf,'nested','sqlite');
+    assert.throws(()=>verifyAssembly(f),/STATE_REALPATH_UNRESOLVED/);
+  }
+});

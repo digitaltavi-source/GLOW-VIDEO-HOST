@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# GLOW-VIDEO-HOST Public Pipe Pre-Commit Gate
+# Blocks private-runtime bundles, media binaries, SQLite DBs, and secrets from entering the public repo.
+
+staged="$(git diff --cached --name-only --diff-filter=ACMR)"
+if [[ -z "$staged" ]]; then
+  exit 0
+fi
+
+while IFS= read -r file; do
+  [[ -z "$file" ]] && continue
+  case "$file" in
+    private-runtime/*|*.mp4|*.mov|*.wav|*.mp3|*.db|*.sqlite*|*.pem|*.key|.env|.env.*)
+      echo "BLOCKED BY PUBLIC REPO GATE: Private runtime, media, state, or secret staged: $file" >&2
+      exit 1
+      ;;
+  esac
+done <<< "$staged"
