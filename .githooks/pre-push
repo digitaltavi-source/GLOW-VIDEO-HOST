@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# GLOW-VIDEO-HOST Public Pipe Pre-Push Gate
+# GLOW-VIDEO-HOST Public Pipe Pre-Push Gate (/glow HQ Standard)
+# 1. Blocks direct pushes to refs/heads/main or refs/heads/master unless GLOW_ALLOW_MAIN_PROMOTION=1.
+# 2. Runs 14-test fail-closed assembly verification suite.
+
+if [ ! -t 0 ]; then
+  while read -r local_ref local_sha remote_ref remote_sha; do
+    [ -z "${local_ref:-}" ] && continue
+    if [[ "${remote_ref:-}" == "refs/heads/main" || "${remote_ref:-}" == "refs/heads/master" ]]; then
+      if [[ "${GLOW_ALLOW_MAIN_PROMOTION:-0}" != "1" ]]; then
+        echo "[BLOCK] Direct push to ${remote_ref} denied. Set GLOW_ALLOW_MAIN_PROMOTION=1 after F4 human sign-off." >&2
+        exit 1
+      fi
+    fi
+  done
+fi
+
 npm test
