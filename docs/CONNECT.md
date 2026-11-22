@@ -36,7 +36,7 @@ Khi triển khai `GLOW-VIDEO-HOST` cùng gói `private-runtime/` từ `GLOW-VIDE
 
 ## 3. Quy Trình 5 Bước Nạp Gói Từ `GLOW-VIDEO-FACTORY` Sang `GLOW-VIDEO-HOST`
 
-Mỗi khi Nhà máy chính (`GLOW-VIDEO-FACTORY`) nâng cấp tính năng mới trên nhánh `main` (ví dụ commit `ddf45688ca6345ac64451ecb0b59a7cc9b4e93f6` / HEAD `main` `053c0e2cd7b01f5d2d79866e6332baffda75e3e7`, hoặc kiểm định trước trên ứng viên `sandbox` `6431758a8a1286f7a63924e38ed4b813b9206aa2`):
+Mỗi khi Nhà máy chính (`GLOW-VIDEO-FACTORY`) nâng cấp tính năng mới trên nhánh `main` (ví dụ commit `ddf45688ca6345ac64451ecb0b59a7cc9b4e93f6` / HEAD `main` `053c0e2cd7b01f5d2d79866e6332baffda75e3e7`, hoặc kiểm định trước trên ứng viên `sandbox` `2711a228cdbb2cb22f97632951b7557bb07079a9`):
 
 1. **Đóng gói tại Nhà máy Private:** Chạy công cụ đóng gói trong `GLOW-VIDEO-FACTORY` để xuất thư mục `private-runtime/` kèm file `assembly-manifest.json` (chứa danh sách toàn bộ file và mã băm SHA-256 tương ứng).
 2. **Nạp vào Máy chủ Hosting:** Đặt thư mục `private-runtime/` vào gốc thư mục triển khai của `GLOW-VIDEO-HOST` trên máy chủ Hosting.
